@@ -19,11 +19,29 @@ class Application():
 chemin1 = ['T', 'P', 'M', 'L', 'S']
 chemin2 = ['T', 'S', 'L', 'M', 'P']
  
+#Croissement
+#Enfant = chemin2[:2] + chemin1[1:4]
+Enfant=[]
+for v in Enfant:
+    if (randint(1, 4) < 2):
+        
+        child1=chemin1[:a]+chemin2[a:]
+        Enfant.append(child1)
+        child2=chemin2[:a]+chemin1[a:]
+        Enfant.append(child2)
+        print(Enfant)
 
-Enfant = chemin2[:2] + chemin1[1:4]
+
+
 
 print(Enfant)
-if(random() <=0.5):
+
+
+
+
+
+#Mutation
+if(random() < 0.5):
     r = randint(1, 4)
     index = randint(1,4)
     print(r)
@@ -31,7 +49,7 @@ if(random() <=0.5):
     for i in Enfant:
         if(r != index):
             tmp = None
-            tmp = Enfant[index]
-            Enfant[index] = Enfant[r]
-            Enfant[r] = tmp
+            tmp = Enfant[index]  
+            Enfant[index] = Enfant[r]   
+            Enfant[r] = tmp   
             print (Enfant)

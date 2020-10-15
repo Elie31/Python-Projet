@@ -16,25 +16,20 @@ class Application():
  
 
 
-chemin1 = ['T', 'P', 'M', 'L', 'S']
-chemin2 = ['T', 'S', 'L', 'M', 'P']
+chemin1 = ['T', 'P', 'M', 'L', 'S','T']
+chemin2 = ['T', 'M', 'S', 'L', 'P','T']
  
 #Croissement
-#Enfant = chemin2[:2] + chemin1[1:4]
-Enfant=[]
+Enfant = chemin1[:2] + chemin2[2:4] + chemin1[-2:]
+Enfant2 = chemin2[:2] + chemin1[2:4] + chemin2[-2:]
+
 for v in Enfant:
-    if (randint(1, 4) < 2):
         
-        child1=chemin1[:a]+chemin2[a:]
-        Enfant.append(child1)
-        child2=chemin2[:a]+chemin1[a:]
-        Enfant.append(child2)
-        print(Enfant)
-
-
-
-
+        print(v)
+        
 print(Enfant)
+print(Enfant2)
+
 
 
 

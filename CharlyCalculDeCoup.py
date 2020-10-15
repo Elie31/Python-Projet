@@ -11,22 +11,33 @@ class Application():
                    [900,200,900,0,300],
                    [900,300,800,300,0]])
 
- 
- pointDepart = distance[0,0]
- 
- 
+
  chemin1 = ['T', 'P', 'M', 'L', 'S']
  
+ a = 0
+ i = 0
+ valeurChemin = 0
+ while i < len(chemin1):
+  tmp = None
+  x = randint(1,4)
+  valeurChemin += distance[a,x]
+  tmp = x
+  a = tmp
+  x = randint(1,4)
+  i += 1
+ print(valeurChemin) 
+  
+
+
 
  #print (len(chemin1))
  #while i < len(chemin1):
      
- valeurChemin = distance[distance[0], distance[1]]
- print (valeurChemin)
-     
-     #i = i+1
-     
- 
+
+# valeurChemin = distance[a, b]
+# print (valeurChemin)
+
+    
  
  #
  #Pour index de depart 

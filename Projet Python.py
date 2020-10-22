@@ -1,11 +1,10 @@
 from numpy import *
 from random import *
 
-class Application():
+
 
  
 
- ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
 
 
 def initialisation(ville):
@@ -71,9 +70,13 @@ def Mutation(enfant):
     return enfant
 
 
-def calculDeCoût(mutation1, mutaion2, chemin1, chemin2) :
-                  
-    distance = array([['T','P','M','L','S','A','N','B','V']
+
+
+
+
+def calculDeCoût(chemin) :
+    matrice = ['T','P','M','L','S','A','N','B','V']              
+    distance = array([
                    [0,70,20,90,90,40,25,45,60],
                    [70,0,50,20,30,30,10,50,20],
                    [20,50,0,90,80,20,10,60,30],
@@ -83,28 +86,28 @@ def calculDeCoût(mutation1, mutaion2, chemin1, chemin2) :
                    [25,10,10,70,60,15,0,15,30],
                    [45,50,60,25,10,30,15,0,10],
                    [60,20,30,50,30,20,30,10,0]])
- 
 
-    b = 1
+
+    b = 0
     i = 0
     j = 0
+    x = 0
     valeurChemin = 0
-    while i < len(mutation1):
-         if distance[j,a] == mutation1[i]:
-             valeurChemin += distance[j,b]
-             tmp = j
-             b = tmp
-             i += 1
-    j += 1
-  
-  
- 
+    while x < len(chemin):
+        while j < len(matrice) and i < len(chemin):
+             if matrice[j] == chemin[i]:
+                 valeurChemin += distance[j,b]
+                 b = j
+                 i += 1
+             j += 1
+        j = 0
+        x += 1
     return valeurChemin
-            
-
-
-
+  
+    
+  
 #Main
+ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
 chemin1 = initialisation(ville)
 chemin2 = initialisation(ville)
 print(chemin1)
@@ -125,3 +128,5 @@ mutation2 = Mutation(enfant2)
 print("")
 print (mutation1)
 print (mutation2)
+valeurChemin = calculDeCoût(chemin1)
+print (valeurChemin)

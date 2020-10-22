@@ -3,17 +3,9 @@ from random import *
 
 class Application():
 
-
-                    
- distance = array([[0,700,200,900,900],
-                   [700,0,500,200,300],
-                   [200,500,0,900,800],
-                   [900,200,900,0,300],
-                   [900,300,800,300,0]])
  
 
-
-ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
+ ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
 
 
 def initialisation(ville):
@@ -77,10 +69,38 @@ def Mutation(enfant):
                    enfant[r] = tmp   
                 
     return enfant
+
+
+def calculDeCoût(mutation1, mutaion2, chemin1, chemin2) :
+                  
+    distance = array([['T','P','M','L','S','A','N','B','V']
+                   [0,70,20,90,90,40,25,45,60],
+                   [70,0,50,20,30,30,10,50,20],
+                   [20,50,0,90,80,20,10,60,30],
+                   [90,20,90,0,30,30,70,25,50],
+                   [90,30,80,30,0,50,60,10,30],
+                   [40,30,20,50,30,0,15,30,20],
+                   [25,10,10,70,60,15,0,15,30],
+                   [45,50,60,25,10,30,15,0,10],
+                   [60,20,30,50,30,20,30,10,0]])
+ 
+
+    b = 1
+    i = 0
+    j = 0
+    valeurChemin = 0
+    while i < len(mutation1):
+         if distance[j,a] == mutation1[i]:
+             valeurChemin += distance[j,b]
+             tmp = j
+             b = tmp
+             i += 1
+    j += 1
+  
+  
+ 
+    return valeurChemin
             
-
-
-
 
 
 

@@ -104,12 +104,16 @@ def selectionChemin(tousLesChemins) :
     nouveauParents = [1,2]
     i = 0
     j = 0
-    while i < 2 : 
-        if calculDeCoût(tousLesChemins[j]) == valeurChemins[i] or calculDeCoût(tousLesChemins[j]) == valeurChemins[1] :
-            nouveauParents[i] = tousLesChemins[j]
-            i+=1 
-        j+=1
+    while i < len(nouveauParents) : 
+        for j in range(0, len(tousLesChemins)) :
+            if calculDeCoût(tousLesChemins[j]) == valeurChemins[i] :
+                nouveauParents[i] = tousLesChemins[j]
+                i+=1          
+    print(nouveauParents)
     return nouveauParents
+
+
+
     
 #liste a = avec les 2 premier
 #for i in a: si plus petit alors tu remplace avec celui que compare i

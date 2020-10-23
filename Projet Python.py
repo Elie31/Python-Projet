@@ -3,10 +3,6 @@ from random import *
 
 
 
- 
-
-
-
 def initialisation(ville):
     chemin = ['T']
     while len(chemin) < len(ville) + 1:
@@ -15,11 +11,6 @@ def initialisation(ville):
             chemin.append(ville[random])
     return chemin
     
-    
-
-
-
-
 
 
 def GeneCommun(enfant1, enfant2):    
@@ -52,8 +43,7 @@ def GeneCommun(enfant1, enfant2):
     return enfant1
 
 
-           
-           
+                   
 
 #Mutation
 def Mutation(enfant):
@@ -72,9 +62,8 @@ def Mutation(enfant):
 
 
 
-
-
 def calculDeCoût(chemin) :
+    
     matrice = ['T','P','M','L','S','A','N','B','V']              
     distance = array([
                    [0,70,20,90,90,40,25,45,60],
@@ -86,8 +75,6 @@ def calculDeCoût(chemin) :
                    [25,10,10,70,60,15,0,15,30],
                    [45,50,60,25,10,30,15,0,10],
                    [60,20,30,50,30,20,30,10,0]])
-
-
     b = 0
     i = 0
     j = 0
@@ -103,8 +90,30 @@ def calculDeCoût(chemin) :
         j = 0
         x += 1
     return valeurChemin
-  
+
+def selectionChemin(tousLesChemins) :
     
+    i = 0
+    valeurChemins = [1,2,3,4]
+    
+    while i < 4 :
+        valeurChemins[i] = calculDeCoût(tousLesChemins[i])
+        i += 1
+    valeurChemins.sort()
+    
+    nouveauParents = [1,2]
+    i = 0
+    j = 0
+    while i < 2 : 
+        if calculDeCoût(tousLesChemins[j]) == valeurChemins[i] or calculDeCoût(tousLesChemins[j]) == valeurChemins[1] :
+            nouveauParents[i] = tousLesChemins[j]
+            i+=1 
+        j+=1
+    return nouveauParents
+    
+#liste a = avec les 2 premier
+#for i in a: si plus petit alors tu remplace avec celui que compare i
+
   
 #Main
 ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
@@ -128,5 +137,6 @@ mutation2 = Mutation(enfant2)
 print("")
 print (mutation1)
 print (mutation2)
-valeurChemin = calculDeCoût(chemin1)
-print (valeurChemin)
+tousLesChemins = [chemin1, chemin2, enfant1, enfant2]
+selectionChemin(tousLesChemins)
+

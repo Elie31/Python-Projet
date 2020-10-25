@@ -78,17 +78,15 @@ def calculDeCoût(chemin) :
     b = 0
     i = 0
     j = 0
-    x = 0
     valeurChemin = 0
-    while x < len(chemin):
-        while j < len(matrice) and i < len(chemin):
-             if matrice[j] == chemin[i]:
-                 valeurChemin += distance[j,b]
-                 b = j
-                 i += 1
-             j += 1
-        j = 0
-        x += 1
+
+    while j < len(matrice) and i < len(chemin):  # ici c'est cassé
+        if matrice[j] == chemin[i]:
+             valeurChemin += distance[j,b]
+             b = j
+             i += 1
+        j += 1
+    
     return valeurChemin
 
 def selectionChemin(tousLesChemins) :
@@ -104,21 +102,21 @@ def selectionChemin(tousLesChemins) :
     nouveauParents = [1,2]
     i = 0
     j = 0
-    while i < len(nouveauParents) : 
+    while i < len(nouveauParents) :
         for j in range(0, len(tousLesChemins)) :
-            if calculDeCoût(tousLesChemins[j]) == valeurChemins[i] :
+            if calculDeCoût(tousLesChemins[j]) == valeurChemins[j] :
                 nouveauParents[i] = tousLesChemins[j]
+                j= 0
                 i+=1          
     print(nouveauParents)
     return nouveauParents
-
 
 
     
 #liste a = avec les 2 premier
 #for i in a: si plus petit alors tu remplace avec celui que compare i
 
-  
+
 #Main
 ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
 chemin1 = initialisation(ville)
@@ -141,6 +139,8 @@ mutation2 = Mutation(enfant2)
 print("")
 print (mutation1)
 print (mutation2)
-tousLesChemins = [chemin1, chemin2, enfant1, enfant2]
+print("")
+tousLesChemins = [chemin1, chemin2, mutation1, mutation2]
 selectionChemin(tousLesChemins)
-
+Enfant1 = selectionChemin(nouveauParents[0])
+Enfant2 = selectionChemin(nouveauParents[1])

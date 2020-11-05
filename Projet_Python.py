@@ -1,5 +1,9 @@
 from numpy import *
 from random import *
+import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import turtle
+from turtle import *
 
 
 
@@ -12,7 +16,6 @@ def initialisation(ville):
     return chemin
     
 
-
 def GeneCommun(enfant1, enfant2):    
     ajouter = 2;
     i = 0 
@@ -23,7 +26,7 @@ def GeneCommun(enfant1, enfant2):
                 save = False
                 index = 0
                 for j in enfant1:
-                    if enfant1[i] == j :
+                    if enfant1[i] == j:
                         if save == True :
                             enfant2.append(enfant1[index])
                             enfant1.pop(index)
@@ -39,11 +42,13 @@ def GeneCommun(enfant1, enfant2):
                             enfant1.pop(index)
                             delete = True
                     index = index + 1
+        
         i = i+1
+        
     return enfant1
 
 
-                   
+
 
 #Mutation
 def Mutation(enfant):
@@ -56,6 +61,7 @@ def Mutation(enfant):
                    tmp = enfant[index]  
                    enfant[index] = enfant[r]   
                    enfant[r] = tmp   
+       
                 
     return enfant
 
@@ -66,15 +72,15 @@ def calculDeCoût(chemin) :
     
     matrice = ['T','P','M','L','S','A','N','B','V']              
     distance = array([
-                   [0,70,20,90,90,40,25,45,60],
-                   [70,0,50,20,30,30,10,50,20],
-                   [20,50,0,90,80,20,10,60,30],
-                   [90,20,90,0,30,30,70,25,50],
-                   [90,30,80,30,0,50,60,10,30],
-                   [40,30,20,50,30,0,15,30,20],
-                   [25,10,10,70,60,15,0,15,30],
-                   [45,50,60,25,10,30,15,0,10],
-                   [60,20,30,50,30,20,30,10,0]])
+                   [0,68,40,90,94,82,15,24,15],
+                   [68,0,77,22,49,16,79,58,51],
+                   [40,77,0,99,80,93,25,65,55],
+                   [90,22,99,0,52,14,99,80,86],
+                   [94,49,80,52,0,52,88,94,91],
+                   [82,16,93,14,52,0,93,72,79],
+                   [15,79,25,99,88,93,0,39,30],
+                   [24,58,65,80,94,72,39,0,14],
+                   [15,51,55,86,91,79,30,14,0]])
     b = 0
     i = 0
     j = 0
@@ -109,21 +115,25 @@ def selectionChemin(tousLesChemins) :
         valeurChemins[i] = calculDeCoût(tousLesChemins[i])
         i += 1
     valeurChemins.sort()
+    print(valeurChemins)
+    del valeurChemins[2:]
     
-    nouveauParents = [1,2]
-    i = 0
-    j = 0
-    while i < len(nouveauParents) :
-        for j in range(0, len(tousLesChemins)) :
-            if calculDeCoût(tousLesChemins[j]) == valeurChemins[i] :
-                nouveauParents[i] = tousLesChemins[j]
-                print(i)
-                i+=1  
-        j= 0
-        print(j)
-    print(nouveauParents)
+    nouveauParents = []
+
+    for j in tousLesChemins :
+        if ((calculDeCoût(j) == valeurChemins[0] or calculDeCoût(j) == valeurChemins[1]) and len(nouveauParents) < 2):
+            nouveauParents.append(j)
+            
+            
+            
+    if(nouveauParents[0] == nouveauParents[1]):
+        nouveauParents[1] = tousLesChemins[3]
+                
     return nouveauParents
 
+def pointChemin(point):
+    t = 0
+    
 
     
 #liste a = avec les 2 premier
@@ -132,31 +142,87 @@ def selectionChemin(tousLesChemins) :
 
 #Main
 ville = ['P', 'M', 'L', 'S', 'A', 'N', 'B', 'V']
+cheminC = ['T', 'N', 'M', 'V', 'B', 'P', 'A', 'L', 'S']
 chemin1 = initialisation(ville)
 chemin2 = initialisation(ville)
 print(chemin1)
 print(chemin2)
-#Croissement
-Enfant1 = chemin1[:3] + chemin2[3:5] + chemin1[5:]
-Enfant2 = chemin2[:3] + chemin1[3:5] + chemin2[5:]
-print("")
-print(Enfant1)
-print(Enfant2)
-enfant1 = GeneCommun(Enfant1, Enfant2)
-enfant2 = GeneCommun(Enfant2, Enfant1)
-print("")
-print(enfant1)
-print(enfant2)
-mutation1 = Mutation(enfant1)
-mutation2 = Mutation(enfant2)
-print("")
-print (mutation1)
-print (mutation2)
-print("")
+  
 
-tousLesChemins = [chemin1, chemin2, mutation1, mutation2]
-calcul = selectionChemin(tousLesChemins)
-print(calcul)
 
-#Enfant1 = selectionChemin(nouveauParents[0])
-#Enfant2 = selectionChemin(nouveauParents[1])
+
+i = 0
+while i < 20:
+    
+    #Croissement
+    if(random() < 0.5):
+        Enfant1 = chemin1[:3] + chemin2[3:5] + chemin1[5:]
+        Enfant2 = chemin2[:3] + chemin1[3:5] + chemin2[5:]
+    else:
+        Enfant1 = chemin2[:3] + chemin1[3:5] + chemin2[5:] 
+        Enfant2 = chemin1[:3] + chemin2[3:5] + chemin1[5:]
+        
+    enfant1 = GeneCommun(Enfant1, Enfant2)
+    enfant2 = GeneCommun(Enfant2, Enfant1)
+    
+    if (i == 100 or i == 1000 or i == 2000 or i == 5000 or i == 10000 or i == 10500):
+      print("JE SUIS LA AAAA")
+      enfant1 = initialisation(ville)
+      enfant2 = initialisation(ville)
+    
+    print(enfant1)
+    print(enfant2)
+
+ 
+    mutation1 = Mutation(enfant1)
+    mutation2 = Mutation(enfant2)
+    
+    cout = calculDeCoût(chemin1)
+    cout2 = calculDeCoût(chemin2)
+
+    print(cout)
+    print(cout2)
+    tousLesChemins = [chemin1, chemin2, mutation1, mutation2]
+    
+    select = selectionChemin(tousLesChemins)
+    print(select)
+  
+    
+   
+    
+    chemin1 = select[0]
+    chemin2 = select[1]
+    i +=1
+    
+    
+    
+    
+    
+
+#turtle.setup(500, 500)
+#up()
+#goto(-100,-100)
+#down()
+#for k in range(5):
+  #  forward(200)
+   # left(72)
+    
+#up()
+#goto(-10,-30)
+#down()
+#turtle.write("T")
+
+
+#for k in select[0]:
+ #   pointChemin(k)
+  #  goto(i + 5,i + 5)
+   # turtle.write(k)
+
+#exitonclick()
+    
+# (calculDeCoût(chemin1) > 250 and calculDeCoût(chemin1) > 249)
+
+
+# le meilleur chemins fait 249
+# t n m v b p a l s
+
